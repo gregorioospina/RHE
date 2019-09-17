@@ -10,7 +10,7 @@ class App extends React.Component {
     this.insertName = this.insertName.bind(this);
 
     this.state = {
-      names: ""
+      name: ""
     }
   }
 
@@ -18,18 +18,17 @@ class App extends React.Component {
     return (
       <>
       <div> Hola todos, como van !</div>
-      <div>{this.printNames()}</div>
+      <div>Chao</div>
       </>
     );
   }
 
   componentDidMount(){
-    this.insertName();
     this.getNames();
   }
 
   printNames(){
-      return (<p> {this.state.names} </p>);
+      return (<p> {this.state.name} </p>);
   }
 
   insertName(newnm){
@@ -42,20 +41,16 @@ class App extends React.Component {
       headers: {"Content-Type":"application/json"},
       body: nm })
       .then(res =>{
-        console.log(res);
-        console.log("hoooola")
+        console.log("ok")
       })
-      .then(final =>{
-        console.log(final);
-      })
+
   }
 
-  getNames(){
+  getNames(){ 
     fetch("/names")
-    .then(res =>{
-      console.log(res);
-      return res.json()})
+    .then(res => res.json())
       .then(_names => {
+        console.log(_names);
         this.setState({names: _names.value});
       })
   }
